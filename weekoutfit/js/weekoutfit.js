@@ -196,6 +196,7 @@ function initDraggable(){
 }
 function initAdd(){
   $(".addpoint").click(function(){
+    $(".load_admin").show(0);
     var actions = "getP";
     var ids = [];
     $(".collegatore .row").each(function(){
@@ -207,6 +208,7 @@ function initAdd(){
       data:{actions:actions,ids:ids},
       success:function(msg){
         $("#content").append(msg);
+        $(".load_admin").hide(0);
         $("#productsModal").modal("show");
         $("button[data-product-id]").off("click");
         $("button[data-product-id]").on("click",function(){

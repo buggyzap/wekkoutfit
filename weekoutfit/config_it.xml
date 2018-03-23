@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>weekoutfit</name>
+	<displayName><![CDATA[Outfit of the Week]]></displayName>
+	<version><![CDATA[0.1]]></version>
+	<description><![CDATA[Crea un modulo che inserisce nell&#039;homepage una foto collegata con dei prodotti.]]></description>
+	<author><![CDATA[DGCAL SRL]]></author>
+	<tab><![CDATA[Admin]]></tab>
+	<is_configurable>1</is_configurable>
+	<need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+</module>
