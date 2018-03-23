@@ -5,9 +5,8 @@ if (!defined('_PS_VERSION_'))
     exit;
     $actions = isset($_POST["actions"]) ? $_POST["actions"] : "getP";
     if($actions == "getP"){
-$category = new Category(Context::getContext()->shop->getCategory(),(int)Context::getContext()->language->id);
-$nb = 10000;
-$products = $category->getProducts((int)Context::getContext()->language->id, 1, ($nb ? $nb : 10));
+$id_lang = Context::getContext()->language->id;
+$products = Product::getProducts($id_lang, 0, 0, 'id_product', 'DESC',0,true );
 ?>
 <!-- Modal -->
 <div id="productsModal" class="modal fade" role="dialog">
@@ -25,7 +24,6 @@ $products = $category->getProducts((int)Context::getContext()->language->id, 1, 
            <thead>
              <tr>
                <th>ID</th>
-               <th>Immagine</th>
                <th>Nome</th>
                <th>Azioni</th>
              </tr>
@@ -35,7 +33,7 @@ $products = $category->getProducts((int)Context::getContext()->language->id, 1, 
              foreach($products as $prodotto){
                 $image = Product::getCover((int)$prodotto["id_product"]);
                 $image = new Image($image['id_image']);
-                $imagePath = _PS_BASE_URL_._THEME_PROD_DIR_.$image->getExistingImgPath()."-medium_default.jpg";
+                $imagePath = Context::getContext()->shop->getBaseURL(true)._THEME_PROD_DIR_.$image->getExistingImgPath()."-medium_default.jpg";
                ?>
                <tr <?php if(in_array($prodotto["id_product"],$_POST["ids"])){
                   ?>
@@ -45,7 +43,6 @@ $products = $category->getProducts((int)Context::getContext()->language->id, 1, 
                ?>
                >
                  <td><?=$prodotto["id_product"]?></td>
-                 <td class="product_image"><img src="<?=$imagePath?>" style="width:100px;" /></td>
                  <td class="product_name"><?=$prodotto["name"]?></td>
                  <td><button type="button" class="btn btn-success" data-product-id="<?=$prodotto["id_product"]?>">Aggiungi</button></td>
                </tr>
@@ -65,10 +62,16 @@ $products = $category->getProducts((int)Context::getContext()->language->id, 1, 
 <script>
 $(document).ready(function(){
   if ( $.fn.dataTable.isDataTable( '#productsModal table' ) ) {
-    table = $('#example').DataTable();
+    table = $('#example').DataTable({
+      "order": [[ 0, "desc" ]],
+      "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Italian.json"
+        }
+    });
 }
 else {
     table = $('#productsModal table').DataTable({
+      "order": [[ 0, "desc" ]],
       "language": {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Italian.json"
         }

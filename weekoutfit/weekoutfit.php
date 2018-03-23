@@ -55,16 +55,9 @@ public function getContent()
     $echo .= $this->renderForm();
     $echo .=
     '
-    <style>
-    .container_import{
-      position: relative;
-      padding: 20px;
-      margin-bottom: 20px;
-      border: solid 1px #d3d8db;
-      background-color: #fff;
-      border-radius: 5px;
-    }
-    </style>
+    <div class="load_admin">
+    <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
     ';
      $currentOutfit = Configuration::get('PS_WEEKOUTFIT');
     if(isset($currentOutfit) && !empty($currentOutfit) && count(json_decode($currentOutfit)) > 0){
