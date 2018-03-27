@@ -1,4 +1,4 @@
-{if isset($weekoutfit_status) && $weekoutfit_status == 1}
+{if isset($weekoutfit_status) && $weekoutfit_status == 1 && $page_name == 'index'}
 <div id="weekoutfit_block_home" class="block">
   <div class="week_content">
     <div class="week_viewport">
