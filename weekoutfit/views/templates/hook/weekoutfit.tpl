@@ -21,7 +21,7 @@
             </div>
           </div>
           {/foreach}
-          <img src="img/{$outfit->image}" style="width:100%;" />
+          <img src="{$base_dir}img/{$outfit->image}" style="width:100%;" />
          </div>
         <div class="col-md-4 week_products">
            <div class="row">

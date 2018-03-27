@@ -213,23 +213,30 @@ function initAdd(){
         $("button[data-product-id]").off("click");
         $("button[data-product-id]").on("click",function(){
           let product_id = $(this).attr("data-product-id");
-          let image = $(this).parent().parent().find(".product_image img").attr("src");
+          let actions = "getImageFromId";
           let name = $(this).parent().parent().find(".product_name").text();
-          $(".collegatore").append(addRow(product_id,image,name));
-          $(".elimina").click(function(){
-            var pid = $(this).attr("data-delete-product-id");
-            $(".collegatore .row[data-pid=\'"+pid+"\']").remove();
-            $(".point[data-pid=\'"+pid+"\']").remove();
-          })
-          $("#productsModal").modal("hide");
-          setTimeout(function(){
-            $("#productsModal").remove();
-            let history = $(".point").length + 1;
-            let struct = "<div data-pid=\'"+product_id+"\' class=\'point point"+history+"\'></div>";
-            $(".uploader_inner").append(struct);
-            initDraggable();
-          },700);
-
+          $.ajax({
+            method:"POST",
+            url:"../modules/weekoutfit/weekoutfit_requests.php",
+            data:{actions:actions,product_id:product_id},
+            success:function(msg){
+              let image = msg;
+              $(".collegatore").append(addRow(product_id,image,name));
+              $(".elimina").click(function(){
+                var pid = $(this).attr("data-delete-product-id");
+                $(".collegatore .row[data-pid=\'"+pid+"\']").remove();
+                $(".point[data-pid=\'"+pid+"\']").remove();
+              })
+              $("#productsModal").modal("hide");
+              setTimeout(function(){
+                $("#productsModal").remove();
+                let history = $(".point").length + 1;
+                let struct = "<div data-pid=\'"+product_id+"\' class=\'point point"+history+"\'></div>";
+                $(".uploader_inner").append(struct);
+                initDraggable();
+              },700);
+            }
+          });
         })
       }
     });
