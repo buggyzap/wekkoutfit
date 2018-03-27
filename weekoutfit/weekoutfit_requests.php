@@ -291,5 +291,9 @@ else {
       }
     }
   }
+}else if($actions == "getImageFromId"){
+  $image = Product::getCover((int)$_POST["product_id"]);
+  $image = new Image($image['id_image']);
+  echo $imagePath = Context::getContext()->shop->getBaseURL(true)._THEME_PROD_DIR_.$image->getExistingImgPath()."-medium_default.jpg";
 }
  ?>
