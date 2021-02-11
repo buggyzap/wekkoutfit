@@ -55,6 +55,7 @@ public function getContent()
     $echo .= $this->renderForm();
     $echo .=
     '
+    Tornare alla base
     <div class="load_admin">
     <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
